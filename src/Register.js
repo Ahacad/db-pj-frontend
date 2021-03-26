@@ -15,16 +15,10 @@ export default function Login() {
   return (
     <div className="m-auto flex flex-col w-72 mt-40">
       <TextField required id="form-name" label="昵称" />
-      <TextField
-        required
-        id="form-password"
-        label="密码"
-        type="password"
-        autoComplete="current-password"
-        className={classes.mt1}
-      />
+      <TextField required id="form-password" label="密码" type="password" />
+      <TextField required id="form-password" label="确认密码" type="password" />
       <Button variant="contained" color="primary" className={classes.mt3}>
-        登录
+        注册
       </Button>
     </div>
   );

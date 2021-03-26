@@ -3,8 +3,11 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "./Header";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Login from "./Login";
+import Register from "./Register";
 
-function App() {
+function Foo() {
   const [text, setText] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -20,24 +23,41 @@ function App() {
     };
     fetchData();
   }, []);
+  return (
+    <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <p>
+        {text} edit <code>src/App.js</code> and save to {text} reload.
+      </p>
+      <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn React
+      </a>
+    </header>
+  );
+}
 
+function App() {
   return (
     <div className="App">
-      <Header />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {text} edit <code>src/App.js</code> and save to {text} reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/">
+            <Foo />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
