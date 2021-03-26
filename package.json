@@ -1,6 +1,6 @@
 {
   "name": "test1",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.1",
@@ -18,7 +18,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "release": "standard-version"
   },
   "eslintConfig": {
     "extends": [
