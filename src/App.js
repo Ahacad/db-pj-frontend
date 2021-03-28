@@ -4,8 +4,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "views/Login";
+import Register from "views/Register";
 
 function Foo() {
   const [text, setText] = useState("");
