@@ -6,6 +6,7 @@ import Header from "./Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "views/Login";
 import Register from "views/Register";
+import Main from "views/Main";
 
 function Foo() {
   const [text, setText] = useState("");
@@ -13,13 +14,12 @@ function Foo() {
     const fetchData = async () => {
       console.log("START FETCHING");
       const res = await axios
-        .get("http://localhost:4000/users")
+        .get("https://localhost:4000/users")
         .then((resp) => {
-          console.log(resp);
-          return resp.data[0].email;
+          return resp.data;
         });
       console.log(res);
-      setText(res);
+      setText(res[0].email);
     };
     fetchData();
   }, []);
@@ -54,7 +54,7 @@ function App() {
             <Register />
           </Route>
           <Route path="/">
-            <Foo />
+            <Main />
           </Route>
         </Switch>
       </Router>
