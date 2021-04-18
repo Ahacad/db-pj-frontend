@@ -3,6 +3,8 @@
 ### TODO
 
 - [ ] router for react
+- [ ] send requests
+- [ ] redux for login
 
 - [ ] finish the MAIN page (get posts)
 - [ ] redux for login and authorization control

@@ -1,12 +1,22 @@
 import Card from "components/Card";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Foo() {
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      // TODO: fetch main panel post data
+      axios
+        .get("https://localhost:4000/posts")
+        .then((resp) => {
+          return resp.data;
+        })
+        .then((data) => {
+          setPosts(data);
+          //console.log(data);
+        });
     };
+    fetchData();
   }, []);
   return (
     <>
@@ -15,21 +25,14 @@ function Foo() {
         createTime="2021-04-04T11:19:57.563Z"
         title="Hello world, the first post"
       />
-      <Card
-        name="user1"
-        createTime="2021-04-04T11:19:57.563Z"
-        title="Hello world, the first post"
-      />
-      <Card
-        name="user1"
-        createTime="2021-04-04T11:19:57.563Z"
-        title="Hello world, the first post"
-      />
-      <Card
-        name="user1"
-        createTime="2021-04-04T11:19:57.563Z"
-        title="Hello world, the first post"
-      />
+      {posts.map((post) => (
+        <Card
+          name={post.userid}
+          createTime={post.create_time}
+          title={post.title}
+          key={post.id}
+        />
+      ))}
     </>
   );
 }
