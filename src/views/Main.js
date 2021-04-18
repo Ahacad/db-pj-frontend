@@ -13,25 +13,15 @@ function Foo() {
         })
         .then((data) => {
           setPosts(data);
-          //console.log(data);
+          console.log(data);
         });
     };
     fetchData();
   }, []);
   return (
     <>
-      <Card
-        name="user1"
-        createTime="2021-04-04T11:19:57.563Z"
-        title="Hello world, the first post"
-      />
       {posts.map((post) => (
-        <Card
-          name={post.userid}
-          createTime={post.create_time}
-          title={post.title}
-          key={post.id}
-        />
+        <Card post={post} />
       ))}
     </>
   );

@@ -5,6 +5,7 @@ function displayTime(date) {
 }
 
 export default function Card(props) {
+  const { post } = props;
   return (
     <div className="h-32 pt-2 pl-2 mb-2 text-left border-b-2 border-gray-200 sm:w-152 grid grid-cols-7 gap-1">
       <div className="col-span-1">
@@ -14,13 +15,18 @@ export default function Card(props) {
           )}/40/40`}
           alt="head"
         />
-        <div className="mt-2 pl-1">{props.name}</div>
+        <div className="pl-1 mt-2">{post.name}</div>
       </div>
       <div className="text-xl col-span-5">
-        <div>{props.title}</div>
+        <div>{post.title}</div>
       </div>
       <div className="col-span-1">
-        {formatDistanceToNow(new Date(props.createTime), { addSuffix: true })}
+        <div>
+          {formatDistanceToNow(new Date(post.create_time), { addSuffix: true })}
+        </div>
+        <div className="pl-4 mt-1 text-gray-500">
+          {post.replycount === null ? 0 : post.replycount}
+        </div>
         {/* TODO: like, reply count */}
       </div>
     </div>

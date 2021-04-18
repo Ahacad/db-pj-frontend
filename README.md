@@ -2,14 +2,26 @@
 
 ### TODO
 
-- [ ] router for react
-- [ ] send requests
-- [ ] redux for login
+#### The process
+- [ ] redux for login and authorization (2 sections)
+- [ ] subpage for each post (with the ability to edit and delete) (2
+      sections)
+  - [ ] new page editor --> for posts
+  - [ ] reply editor
+  - [ ] detailed design and icons
+  - [ ] show replies in the subpage
+- [ ] "add +" button at right bottom of the page --> write new post
 
-- [ ] finish the MAIN page (get posts)
-- [ ] redux for login and authorization control
+- [ ] router for react
+- [ ] material design
 - [ ] new post page 
+- [x] send requests
+- [x] finish the MAIN page (get posts)
 - [ ] reply page (administer can delete post)
+
+#### Bonuses
+
+- [ ] "HOME" page for personal info
 
 
 ### README
