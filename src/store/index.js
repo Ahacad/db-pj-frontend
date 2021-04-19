@@ -1,8 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
-import loginReducer from "./login";
+import { combineReducers } from "@reduxjs/toolkit";
+import loginStore from "./login";
 
-export default configureStore({
-  reducer: {
-    login: loginReducer,
-  },
-});
+export default loginStore;

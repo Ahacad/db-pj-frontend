@@ -1,22 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createStore } from "redux";
 
-export const loginSlice = createSlice({
-  name: "login",
-  initialState: {
-    logined: false,
-  },
-  reducers: {
-    login: (state) => {
-      state.logined = true;
-    },
-    logout: (state) => {
-      state.logined = false;
-    },
-  },
-});
+const initialState = {
+  loggedin: false,
+  id: -1,
+};
 
-export const { login, logout } = loginSlice.actions;
+const loginReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      return { loggedin: true, id: 1 };
+    default:
+      return state;
+  }
+};
 
-export const selectLogin = (state) => state.login.logined;
+const loginStore = createStore(loginReducer);
 
-export default loginSlice.reducer;
+export default loginStore;
