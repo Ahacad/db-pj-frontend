@@ -1,3 +1,3 @@
-import loginAction from "./login";
+import { loginAction } from "./login";
 
 export default loginAction;
