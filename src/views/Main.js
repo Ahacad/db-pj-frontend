@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Foo() {
+  const history = useHistory();
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -30,11 +32,15 @@ function Foo() {
     };
     fetchData();
   }, []);
+
+  const handleClickPost = (id) => {
+    history.push(`/post/${id}`);
+  };
   return (
     <>
       <div className="mx-auto sm:w-152 mt-2">
         {posts.map((post) => (
-          <Card post={post} />
+          <Card post={post} handleClick={() => handleClickPost(post.id)} />
         ))}
       </div>
 

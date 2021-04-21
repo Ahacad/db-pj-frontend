@@ -17,7 +17,7 @@ export default function Card(props) {
         />
         <div className="pl-1 mt-2">{post.name}</div>
       </div>
-      <div className="text-xl col-span-5">
+      <div className="text-xl col-span-5" onClick={props.handleClick}>
         <div>{post.title}</div>
       </div>
       <div className="col-span-1">
