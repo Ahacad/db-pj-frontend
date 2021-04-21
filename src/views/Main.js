@@ -32,9 +32,12 @@ function Foo() {
   }, []);
   return (
     <>
-      {posts.map((post) => (
-        <Card post={post} />
-      ))}
+      <div className="mx-auto sm:w-152 mt-2">
+        {posts.map((post) => (
+          <Card post={post} />
+        ))}
+      </div>
+
       <Fab color="primary" className={classes.fab}>
         <AddIcon />
       </Fab>
