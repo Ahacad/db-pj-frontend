@@ -59,6 +59,9 @@ function Header(props) {
                   onClick={handleMenu}
                   color="inherit"
                 >
+                  {props.value.id === 0 && (
+                    <div className="mr-2 text-base">Admin</div>
+                  )}
                   <AccountCircle />
                 </IconButton>
                 <Menu
