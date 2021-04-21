@@ -2,6 +2,7 @@ import { TextField, Button, Snackbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { loginAction } from "actions";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login(props) {
+  const history = useHistory();
   const classes = useStyles();
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,6 +58,7 @@ function Login(props) {
         const { id, name } = resp.data;
         if (resp.status === 200) {
           props.login(id);
+          history.replace("/");
         }
       })
       .catch((err) => {
