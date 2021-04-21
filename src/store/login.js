@@ -16,6 +16,9 @@ const loginReducer = (state = initialState, action) => {
   }
 };
 
-const loginStore = createStore(loginReducer);
+const loginStore = createStore(
+  loginReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 export default loginStore;
