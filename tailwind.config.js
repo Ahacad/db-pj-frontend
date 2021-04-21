@@ -5,6 +5,11 @@ module.exports = {
     extend: {
       width: {
         152: "38rem",
+        190: "47.5rem",
+      },
+      minHeight: {
+        10: "2.5rem",
+        48: "12rem",
       },
     },
   },
