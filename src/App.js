@@ -4,9 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Login from "views/Login";
-import Register from "views/Register";
-import Main from "views/Main";
+import { Login, Register, Main, Thread } from "views";
 
 function Foo() {
   const [text, setText] = useState("");
@@ -47,6 +45,9 @@ function App() {
       <Router>
         <Header />
         <Switch>
+          <Route path="/post/:id">
+            <Thread />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>

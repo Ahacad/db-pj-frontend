@@ -3,7 +3,8 @@
 ### TODO
 
 #### The process
-- [ ] redux for login and authorization (2 sections)
+- [x] redux for login and authorization (2 sections)
+- [ ] global material snackbar with redux
 - [ ] subpage for each post (with the ability to edit and delete) (2
       sections)
   - [ ] new page editor --> for posts
