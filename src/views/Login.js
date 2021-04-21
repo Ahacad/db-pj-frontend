@@ -1,6 +1,6 @@
 import { TextField, Button, Snackbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import loginAction from "actions";
+import { loginAction } from "actions";
 import { connect } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
