@@ -7,7 +7,7 @@ function displayTime(date) {
 export default function Card(props) {
   const { post } = props;
   return (
-    <div className="h-32 pt-2 pl-2 mb-2 text-left border-b-2 border-gray-200 sm:w-152 grid grid-cols-7 gap-1">
+    <div className="h-32 pt-2 pl-2 text-left border-b-2 border-gray-200 cursor-pointer sm:w-152 grid grid-cols-7 gap-1 hover:bg-gray-50">
       <div className="col-span-1">
         <img
           src={`https://picsum.photos/seed/${Math.floor(
