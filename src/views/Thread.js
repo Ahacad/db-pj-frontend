@@ -2,9 +2,13 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ReplyCard from "components/ReplyCard";
+import SendIcon from "@material-ui/icons/Send";
 import EditIcon from "@material-ui/icons/Edit";
-import { Fab } from "@material-ui/core";
+import { Fab, Slide, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   fab: {
     position: "fixed",
@@ -14,15 +18,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Thread(props) {
+  const params = useParams();
   const classes = useStyles();
-  const post = {
-    title: "TESTING TITLe",
-    content: "TESTINGCONTENTTESTINGCONTENT",
-    likecount: 30,
+  const [editorOpened, setEditorOpened] = useState(false);
+  const [newreply, setNewReply] = useState({ content: "" });
+  const [post, setPost] = useState({ title: "", content: "", likecount: 0 });
+  const [replies, setReplies] = useState([]);
+  const handleSendNewreply = () => {};
+  const handleNewreplyContent = (ev) => {
+    ev.preventDefault();
+    setNewReply({ ...newreply, content: ev.target.value });
   };
-  const replies = [{}, {}, {}];
+  const fetchThread = async () => {
+    axios
+      .get(`https://localhost:4000/posts/${params.id}`)
+      .then((resp) => resp.data)
+      .then((data) => {
+        console.log(data);
+        const post = data[0];
+        setPost({
+          title: post.title,
+          content: post.content,
+          likecount: post.likecount,
+        });
+        setReplies(data.slice(1));
+      });
+  };
+  useEffect(() => {
+    fetchThread();
+  }, []);
   return (
-    <div className="mt-2 sm:w-190 Main mx-auto">
+    <div className="mx-auto mt-2 sm:w-190 Main">
       <div className="pb-4 border-b-2 border-gray-200">
         <div className="flex mb-2 min-h-10">
           <img
@@ -51,11 +77,42 @@ function Thread(props) {
         </div>
       </div>
       {replies.map((reply) => (
-        <ReplyCard />
+        <ReplyCard reply={reply} key={reply.id} />
       ))}
-      <Fab color="secondary" className={classes.fab}>
+      <Fab
+        color="secondary"
+        className={classes.fab}
+        onClick={() => {
+          editorOpened === true
+            ? setEditorOpened(false)
+            : setEditorOpened(true);
+        }}
+      >
         <EditIcon />
       </Fab>
+
+      <Slide direction="up" in={editorOpened}>
+        <div className="fixed bg-white border-2 bottom-4 left-2">
+          <div className="text-right">
+            <IconButton
+              edge="start"
+              color="primary"
+              aria-label="menu"
+              onClick={handleSendNewreply}
+            >
+              <SendIcon />
+            </IconButton>
+          </div>
+          <textarea
+            id="editor"
+            value={newreply.content}
+            rows="5"
+            cols="50"
+            onChange={handleNewreplyContent}
+            className="p-4 border-2"
+          ></textarea>
+        </div>
+      </Slide>
     </div>
   );
 }
