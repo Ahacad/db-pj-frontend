@@ -23,7 +23,7 @@ function Editor(props) {
   const { handleNewpostContent, handleNewpostTitle, handleSendNewpost } = props;
   return (
     <div className="fixed border-2 bottom-4">
-      <div className="mb-2 flex justify-between">
+      <div className="flex justify-between mb-2">
         <div className="text-left">
           <TextField
             id="title"
@@ -69,22 +69,22 @@ function Main() {
     setNewpost({ ...newpost, title: ev.target.value });
   };
   const handleSendNewpost = () => {
-    dispatch(showSuccessSnackbar("TEST"));
+    dispatch(showSuccessSnackbar("成功发布"));
     //axios.post("https://localhost:4000/posts/new", {});
     // TODO
   };
+  const fetchData = async () => {
+    axios
+      .get("https://localhost:4000/posts")
+      .then((resp) => {
+        return resp.data;
+      })
+      .then((data) => {
+        setPosts(data);
+        console.log(data);
+      });
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      axios
-        .get("https://localhost:4000/posts")
-        .then((resp) => {
-          return resp.data;
-        })
-        .then((data) => {
-          setPosts(data);
-          console.log(data);
-        });
-    };
     fetchData();
   }, []);
 
