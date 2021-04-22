@@ -14,20 +14,27 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [ ] register api
 - [ ] allow deletion for admins
 - [ ] hottest k
+- [ ] "HOME" page for personal info
+- [ ] divide by different parts
+- [ ] markdown support
+- [ ] much more detailed personal info
+- [ ] 
 - [x] localstorage for login redux state
 - [x] sort posts by createdTime
 
+
+- [ ] rich text support
+- [ ] fix time display format
 - [ ] frontend limit on content length
 - [ ] throttle for redux subscribe and localstorage
 - [ ] debounce for input
 - [ ] multiple global snackbar (snackbar extention, use function to call many snackbar)
 - [ ] fixed app bar
-- [ ] Vercel CD 
+- [x] Vercel CD 
 
 - [x] show replies in post page
   - [x] api to get thread 
 - [x] "add +" button at right bottom of the page --> write new post
-
 - [x] router for react
 - [x] material design
 - [x] new post page 
@@ -35,9 +42,6 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [x] finish the MAIN page (get posts)
 - [x] reply page (administer can delete post)
 
-#### Bonuses
-
-- [ ] "HOME" page for personal info
 
 
 ### README
