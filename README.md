@@ -6,13 +6,14 @@
 - [x] redux for login and authorization (2 sections)
 - [x] global material snackbar with redux
 - [x] subpage for each post (with the ability to edit and delete) (2)
-- [ ] tap edit button and get editor (POST to api)
-- [ ] editor styles and transitions
+- [x] tap edit button and get editor (POST to api)
+- [x] editor styles and transitions
 - [ ] like api
 - [ ] allow deletion for admins
 - [x] localstorage for login redux state
-- [ ] sort posts by createdTime
+- [x] sort posts by createdTime
 
+- [ ] frontend limit on content length
 - [ ] throttle for redux subscribe and localstorage
 - [ ] debounce for input
 - [ ] multiple global snackbar (snackbar extention, use function to call many snackbar)
