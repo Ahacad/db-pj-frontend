@@ -7,6 +7,7 @@
 - [x] global material snackbar with redux
 - [x] subpage for each post (with the ability to edit and delete) (2)
 - [ ] tap edit button and get editor (POST to api)
+- [ ] localstorage for login redux state
 - [ ] debounce for input
 
 - [ ] show replies in post page
