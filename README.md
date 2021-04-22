@@ -17,17 +17,18 @@
 - [ ] throttle for redux subscribe and localstorage
 - [ ] debounce for input
 - [ ] multiple global snackbar (snackbar extention, use function to call many snackbar)
+- [ ] fixed app bar
 
-- [ ] show replies in post page
-  - [ ] api to get thread 
+- [x] show replies in post page
+  - [x] api to get thread 
 - [x] "add +" button at right bottom of the page --> write new post
 
-- [ ] router for react
-- [ ] material design
-- [ ] new post page 
+- [x] router for react
+- [x] material design
+- [x] new post page 
 - [x] send requests
 - [x] finish the MAIN page (get posts)
-- [ ] reply page (administer can delete post)
+- [x] reply page (administer can delete post)
 
 #### Bonuses
 
