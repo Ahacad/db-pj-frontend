@@ -11,7 +11,7 @@ import { AccountCircle } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import { logoutAction } from "actions";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 
 function Header(props) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,6 +22,12 @@ function Header(props) {
   const handleClose = (ev) => {
     setAnchorEl(null);
   };
+  const dispatch = useDispatch();
+  const login = useSelector((state) => state.login);
+  console.log("HELLO");
+  console.log(login);
+  console.log(typeof login);
+  console.log(login.loggedin);
   return (
     <>
       <div className="flex flex-grow">
@@ -50,7 +56,7 @@ function Header(props) {
               </Button>
             </div>
 
-            {props.login.loggedin && (
+            {login.loggedin && (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -59,7 +65,7 @@ function Header(props) {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  {props.login.id === 0 && (
+                  {login.id === 0 && (
                     <div className="mr-2 text-base">Admin</div>
                   )}
                   <AccountCircle />
@@ -83,7 +89,7 @@ function Header(props) {
                   <MenuItem
                     onClick={() => {
                       handleClose();
-                      props.logout();
+                      dispatch(logoutAction());
                     }}
                   >
                     Sign out
@@ -98,16 +104,4 @@ function Header(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    login: state.login,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    logout: () => dispatch(logoutAction()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
