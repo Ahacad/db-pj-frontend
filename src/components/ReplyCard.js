@@ -3,14 +3,15 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 
 function ReplyCard(props) {
+  const reply = props.reply;
   const mock = {
     name: "ahahahahahaha",
     content: "HAHAHHAHAHAHAHAHHAAHHA this is really really interesting!",
     likecount: 3,
   };
   return (
-    <div className="flex p-2 mt-1 border-b-2 border-gray-200 min-h-48">
-      <div className="w-10">
+    <div className="flex p-2 mt-1 border-b-2 border-gray-200">
+      <div className="w-10 flex-shrink-0">
         <img
           src={`https://picsum.photos/seed/${Math.floor(
             Math.random() * 1000
@@ -18,12 +19,12 @@ function ReplyCard(props) {
           alt="head"
         />
       </div>
-      <div className="flex-grow text-left pl-2 relative">
+      <div className="relative flex-grow pl-2 text-left">
         <div className="mb-2">{mock.name}</div>
-        <div>{mock.content}</div>
-        <div className="absolute bottom-0 right-0 text-right">
+        <div className="min-h-36">{reply.content}</div>
+        <div className="mt-2 text-right">
           <div className="inline-block mr-1 text-gray-600">
-            {mock.likecount}
+            {reply.likecount}
           </div>
 
           <div className="inline-block mr-2 text-gray-600">
