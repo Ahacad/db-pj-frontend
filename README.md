@@ -1,5 +1,7 @@
 
 
+Backend repo [here](https://github.com/Ahacad/db-pj-backend)
+
 ### TODO
 
 #### The process
@@ -18,6 +20,7 @@
 - [ ] debounce for input
 - [ ] multiple global snackbar (snackbar extention, use function to call many snackbar)
 - [ ] fixed app bar
+- [ ] Vercel CD 
 
 - [x] show replies in post page
   - [x] api to get thread 
