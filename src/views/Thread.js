@@ -8,6 +8,13 @@ import { Fab, Slide, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import GlobalSnackbar from "components/GlobalSnackbar";
+import {
+  showSuccessSnackbar,
+  clearSnackbar,
+  showErrorSnackbar,
+} from "actions/snackbar";
 import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -19,16 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Thread(props) {
   const params = useParams();
+  const userId = useSelector((state) => state.login.id);
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [editorOpened, setEditorOpened] = useState(false);
-  const [newreply, setNewReply] = useState({ content: "" });
+  const [newreply, setNewreply] = useState({ content: "" });
   const [post, setPost] = useState({ title: "", content: "", likecount: 0 });
   const [replies, setReplies] = useState([]);
-  const handleSendNewreply = () => {};
-  const handleNewreplyContent = (ev) => {
-    ev.preventDefault();
-    setNewReply({ ...newreply, content: ev.target.value });
-  };
   const fetchThread = async () => {
     axios
       .get(`https://localhost:4000/posts/${params.id}`)
@@ -43,6 +47,31 @@ function Thread(props) {
         });
         setReplies(data.slice(1));
       });
+  };
+  const handleSendNewreply = () => {
+    if (newreply.content === "") {
+      dispatch(showErrorSnackbar("请输入文字后发布"));
+      return;
+    }
+    axios
+      .post(`https://localhost:4000/posts/${params.id}/newreply`, {
+        userId,
+        content: newreply.content,
+      })
+      .then((resp) => {
+        if (resp.status === 201) {
+          dispatch(showSuccessSnackbar("发布成功"));
+          setNewreply({ content: "" });
+          fetchThread();
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  const handleNewreplyContent = (ev) => {
+    ev.preventDefault();
+    setNewreply({ ...newreply, content: ev.target.value });
   };
   useEffect(() => {
     fetchThread();
@@ -113,6 +142,7 @@ function Thread(props) {
           ></textarea>
         </div>
       </Slide>
+      <GlobalSnackbar />
     </div>
   );
 }
