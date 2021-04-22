@@ -15,7 +15,7 @@ function Alert(props) {
 export default function SuccessSnackbar() {
   const dispatch = useDispatch();
 
-  const { successSnackbarMessage, successSnackbarOpen } = useSelector(
+  const { snackbarOpen, severity, message } = useSelector(
     (state) => state.snackbar
   );
 
@@ -29,13 +29,13 @@ export default function SuccessSnackbar() {
         vertical: "top",
         horizontal: "center",
       }}
-      open={successSnackbarOpen}
+      open={snackbarOpen}
       autoHideDuration={2000}
       onClose={handleClose}
       aria-describedby="client-snackbar"
     >
-      <Alert onClose={handleClose} severity="success">
-        {successSnackbarMessage}
+      <Alert onClose={handleClose} severity={severity}>
+        {message}
       </Alert>
     </Snackbar>
   );

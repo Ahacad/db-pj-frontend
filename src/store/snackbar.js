@@ -3,15 +3,21 @@ const snackbarReducer = (state = {}, action) => {
     case "SNACKBAR_SUCCESS":
       return {
         ...state,
-        successSnackbarOpen: true,
-        successSnackbarMessage: action.message,
+        snackbarOpen: true,
+        message: action.message,
+        severity: "success",
+      };
+    case "SNACKBAR_ERROR":
+      return {
+        ...state,
+        snackbarOpen: true,
+        message: action.message,
+        severity: "error",
       };
     case "SNACKBAR_CLEAR":
       return {
         ...state,
-        successSnackbarOpen: false,
-        errorSnackbarOpen: false,
-        infoSnackbarOpen: false,
+        snackbarOpen: false,
       };
     default:
       return state;

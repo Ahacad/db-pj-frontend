@@ -22,10 +22,9 @@ const getLocalstorageUserState = () => {
 const initialState = {
   login: getLocalstorageUserState(),
   snackbar: {
-    successSnackbarOpen: false,
-    successSnackbarMessage: "",
-    errorSnackbarOpen: false,
-    infoSnackbarOpen: false,
+    snackbarOpen: false,
+    message: "",
+    severity: "success",
   },
 };
 
