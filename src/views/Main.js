@@ -57,6 +57,9 @@ function Main() {
           setNewpost({ title: "", content: "" });
           fetchData();
         }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
   const fetchData = async () => {
