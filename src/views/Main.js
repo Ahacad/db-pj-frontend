@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, useTheme, StylesProvider } from "@material-ui/core/styles";
 import SendIcon from "@material-ui/icons/Send";
 import { TextField, IconButton } from "@material-ui/core";
-import { Fab } from "@material-ui/core";
+import { Fab, Slide } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from "react-router-dom";
-import SuccessSnackbar from "components/SuccessSnackbar";
-import { showSuccessSnackbar, clearSnackbar } from "actions/snackbar";
+import GlobalSnackbar from "components/GlobalSnackbar";
+import {
+  showSuccessSnackbar,
+  clearSnackbar,
+  showErrorSnackbar,
+} from "actions/snackbar";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -19,40 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Editor(props) {
-  const { handleNewpostContent, handleNewpostTitle, handleSendNewpost } = props;
-  return (
-    <div className="fixed border-2 bottom-4">
-      <div className="flex justify-between mb-2">
-        <div className="text-left">
-          <TextField
-            id="title"
-            label="title"
-            variant="outlined"
-            onChange={handleNewpostTitle}
-          />
-        </div>
-        <IconButton
-          edge="start"
-          color="primary"
-          aria-label="menu"
-          onClick={handleSendNewpost}
-        >
-          <SendIcon />
-        </IconButton>
-      </div>
-
-      <textarea
-        id="editor"
-        rows="5"
-        cols="50"
-        onChange={handleNewpostContent}
-        className="p-4 border-2"
-      ></textarea>
-    </div>
-  );
-}
-
 function Main() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -61,6 +31,7 @@ function Main() {
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
   const [newpost, setNewpost] = useState({ title: "", content: "" });
+  const [editorOpened, setEditorOpened] = useState(false);
   const handleNewpostContent = (ev) => {
     ev.preventDefault();
     setNewpost({ ...newpost, content: ev.target.value });
@@ -70,6 +41,10 @@ function Main() {
     setNewpost({ ...newpost, title: ev.target.value });
   };
   const handleSendNewpost = () => {
+    if (newpost.title === "" || newpost.content === "") {
+      dispatch(showErrorSnackbar("请输入文字后发布"));
+      return;
+    }
     axios
       .post("https://localhost:4000/posts/new", {
         userId,
@@ -79,6 +54,7 @@ function Main() {
       .then((resp) => {
         if (resp.status === 201) {
           dispatch(showSuccessSnackbar("成功发布"));
+          setNewpost({ title: "", content: "" });
           fetchData();
         }
       });
@@ -104,20 +80,59 @@ function Main() {
   return (
     <>
       <div className="mx-auto mt-2 sm:w-152">
-        {posts.map((post) => (
-          <Card post={post} handleClick={() => handleClickPost(post.id)} />
+        {[...posts].reverse().map((post) => (
+          <Card
+            post={post}
+            key={post.id}
+            handleClick={() => handleClickPost(post.id)}
+          />
         ))}
       </div>
 
-      <Fab color="primary" className={classes.fab}>
+      <Fab
+        color="primary"
+        className={classes.fab}
+        onClick={() => {
+          editorOpened === true
+            ? setEditorOpened(false)
+            : setEditorOpened(true);
+        }}
+      >
         <AddIcon />
       </Fab>
-      <Editor
-        handleNewpostContent={handleNewpostContent}
-        handleNewpostTitle={handleNewpostTitle}
-        handleSendNewpost={handleSendNewpost}
-      />
-      <SuccessSnackbar />
+
+      <Slide direction="up" in={editorOpened}>
+        <div className="fixed bg-white border-2 bottom-4 left-2">
+          <div className="flex justify-between mb-2">
+            <div className="text-left">
+              <TextField
+                id="title"
+                label="title"
+                variant="outlined"
+                value={newpost.title}
+                onChange={handleNewpostTitle}
+              />
+            </div>
+            <IconButton
+              edge="start"
+              color="primary"
+              aria-label="menu"
+              onClick={handleSendNewpost}
+            >
+              <SendIcon />
+            </IconButton>
+          </div>
+          <textarea
+            id="editor"
+            value={newpost.content}
+            rows="5"
+            cols="50"
+            onChange={handleNewpostContent}
+            className="p-4 border-2"
+          ></textarea>
+        </div>
+      </Slide>
+      <GlobalSnackbar />
     </>
   );
 }
