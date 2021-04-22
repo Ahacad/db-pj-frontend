@@ -1,8 +1,8 @@
 import { formatDistanceToNow } from "date-fns";
 
-function displayTime(date) {
-  // TODO: if time > 1 month, display absoulte time
-}
+//function displayTime(date) {
+//// TODO: if time > 1 month, display absoulte time
+//}
 
 export default function Card(props) {
   const { post } = props;

@@ -2,7 +2,7 @@ import { combineReducers, createStore } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
 import loginReducer from "./login";
 import snackbarReducer from "./snackbar";
-import { throttle } from "lodash";
+//import { throttle } from "lodash";
 
 const getLocalstorageUserState = () => {
   const originUser = { loggedin: false, id: -1 };

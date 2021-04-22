@@ -10,10 +10,10 @@ import {
 import { AccountCircle } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import { logoutAction } from "actions";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-function Header(props) {
+function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const handleMenu = (ev) => {
     setAnchorEl(ev.currentTarget);

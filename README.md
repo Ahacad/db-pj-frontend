@@ -11,6 +11,7 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [x] tap edit button and get editor (POST to api)
 - [x] editor styles and transitions
 - [ ] like api
+- [ ] register api
 - [ ] allow deletion for admins
 - [x] localstorage for login redux state
 - [x] sort posts by createdTime

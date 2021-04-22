@@ -2,18 +2,14 @@ import Card from "components/Card";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles, useTheme, StylesProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from "@material-ui/icons/Send";
 import { TextField, IconButton } from "@material-ui/core";
 import { Fab, Slide } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from "react-router-dom";
 import GlobalSnackbar from "components/GlobalSnackbar";
-import {
-  showSuccessSnackbar,
-  clearSnackbar,
-  showErrorSnackbar,
-} from "actions/snackbar";
+import { showSuccessSnackbar, showErrorSnackbar } from "actions/snackbar";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -71,6 +67,9 @@ function Main() {
       .then((data) => {
         setPosts(data);
         console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
   useEffect(() => {

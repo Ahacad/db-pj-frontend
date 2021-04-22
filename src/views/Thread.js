@@ -1,5 +1,4 @@
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ReplyCard from "components/ReplyCard";
 import SendIcon from "@material-ui/icons/Send";
@@ -10,11 +9,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import GlobalSnackbar from "components/GlobalSnackbar";
-import {
-  showSuccessSnackbar,
-  clearSnackbar,
-  showErrorSnackbar,
-} from "actions/snackbar";
+import { showSuccessSnackbar, showErrorSnackbar } from "actions/snackbar";
 import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -46,7 +41,8 @@ function Thread(props) {
           likecount: post.likecount,
         });
         setReplies(data.slice(1));
-      });
+      })
+      .catcnh((err) => console.error(err));
   };
   const handleSendNewreply = () => {
     if (newreply.content === "") {
@@ -75,7 +71,7 @@ function Thread(props) {
   };
   useEffect(() => {
     fetchThread();
-  }, []);
+  });
   return (
     <div className="mx-auto mt-2 sm:w-190 Main">
       <div className="pb-4 border-b-2 border-gray-200">

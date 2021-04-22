@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import IconButton from "@material-ui/core/IconButton";
-import { Icon } from "@material-ui/core";
 import { clearSnackbar } from "actions/snackbar";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

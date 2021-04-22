@@ -55,7 +55,7 @@ function Login(props) {
       })
       .then((resp) => {
         console.log(resp);
-        const { id, name } = resp.data;
+        const { id } = resp.data;
         if (resp.status === 200) {
           props.login(id);
           history.replace("/");
