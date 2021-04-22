@@ -13,6 +13,7 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [ ] like api
 - [ ] register api
 - [ ] allow deletion for admins
+- [ ] hottest k
 - [x] localstorage for login redux state
 - [x] sort posts by createdTime
 
