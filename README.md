@@ -4,9 +4,10 @@
 
 #### The process
 - [x] redux for login and authorization (2 sections)
-- [ ] global material snackbar with redux
+- [x] global material snackbar with redux
 - [x] subpage for each post (with the ability to edit and delete) (2)
 - [ ] tap edit button and get editor (POST to api)
+- [ ] debounce for input
 
 - [ ] show replies in post page
   - [ ] api to get thread 
