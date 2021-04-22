@@ -50,7 +50,7 @@ function Header(props) {
               </Button>
             </div>
 
-            {props.value.loggedin && (
+            {props.login.loggedin && (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -59,7 +59,7 @@ function Header(props) {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  {props.value.id === 0 && (
+                  {props.login.id === 0 && (
                     <div className="mr-2 text-base">Admin</div>
                   )}
                   <AccountCircle />
@@ -100,7 +100,7 @@ function Header(props) {
 
 function mapStateToProps(state) {
   return {
-    value: state,
+    login: state.login,
   };
 }
 
