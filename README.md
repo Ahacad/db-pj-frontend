@@ -7,12 +7,17 @@
 - [x] global material snackbar with redux
 - [x] subpage for each post (with the ability to edit and delete) (2)
 - [ ] tap edit button and get editor (POST to api)
-- [ ] localstorage for login redux state
+- [ ] editor styles and transitions
+- [ ] like api
+- [ ] allow deletion for admins
+- [x] localstorage for login redux state
+- [ ] sort posts by createdTime
+
+- [ ] throttle for redux subscribe and localstorage
 - [ ] debounce for input
 
 - [ ] show replies in post page
   - [ ] api to get thread 
-- [ ] allow deletion for admins
 - [x] "add +" button at right bottom of the page --> write new post
 
 - [ ] router for react

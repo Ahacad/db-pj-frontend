@@ -56,6 +56,7 @@ function Editor(props) {
 function Main() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.login.id);
 
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
@@ -69,9 +70,18 @@ function Main() {
     setNewpost({ ...newpost, title: ev.target.value });
   };
   const handleSendNewpost = () => {
-    dispatch(showSuccessSnackbar("成功发布"));
-    //axios.post("https://localhost:4000/posts/new", {});
-    // TODO
+    axios
+      .post("https://localhost:4000/posts/new", {
+        userId,
+        title: newpost.title,
+        content: newpost.content,
+      })
+      .then((resp) => {
+        if (resp.status === 201) {
+          dispatch(showSuccessSnackbar("成功发布"));
+          fetchData();
+        }
+      });
   };
   const fetchData = async () => {
     axios
