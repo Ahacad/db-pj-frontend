@@ -15,6 +15,7 @@
 
 - [ ] throttle for redux subscribe and localstorage
 - [ ] debounce for input
+- [ ] multiple global snackbar (snackbar extention, use function to call many snackbar)
 
 - [ ] show replies in post page
   - [ ] api to get thread 
