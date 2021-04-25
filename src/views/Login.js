@@ -58,8 +58,8 @@ function Login(props) {
       })
       .then((resp) => {
         console.log(resp);
-        const { id } = resp.data;
         if (resp.status === 200) {
+          const { id } = resp.data;
           props.login(id);
           dispatch(showSuccessSnackbar("登录成功"));
           history.replace("/");
