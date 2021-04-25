@@ -11,10 +11,10 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [x] tap edit button and get editor (POST to api)
 - [x] editor styles and transitions
 - [ ] like api
-- [ ] register api
+- [x] register api
 - [ ] allow deletion for admins
 - [ ] hottest k
-- [ ] "HOME" page for personal info
+- [ ] "HOME" page for personal info (better user state info from backend)
 - [ ] divide by different parts
 - [ ] markdown support
 - [ ] much more detailed personal info
@@ -23,7 +23,8 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [x] sort posts by createdTime
 
 
-- [ ] rich text support
+- [ ] JWT for authorization
+- [ ] [markdown] rich text support
 - [ ] fix time display format
 - [ ] frontend limit on content length
 - [ ] throttle for redux subscribe and localstorage
