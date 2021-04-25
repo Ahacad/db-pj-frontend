@@ -2,6 +2,7 @@ import "./App.css";
 import Header from "./Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Login, Register, Main, Thread } from "views";
+import GlobalSnackbar from "components/GlobalSnackbar";
 
 //function Foo() {
 //const [text, setText] = useState("");
@@ -56,6 +57,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <GlobalSnackbar />
     </div>
   );
 }

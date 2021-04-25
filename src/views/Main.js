@@ -8,7 +8,6 @@ import { TextField, IconButton } from "@material-ui/core";
 import { Fab, Slide } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from "react-router-dom";
-import GlobalSnackbar from "components/GlobalSnackbar";
 import { showSuccessSnackbar, showErrorSnackbar } from "actions/snackbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -134,7 +133,6 @@ function Main() {
           ></textarea>
         </div>
       </Slide>
-      <GlobalSnackbar />
     </>
   );
 }

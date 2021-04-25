@@ -4,6 +4,8 @@ import { loginAction } from "actions";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { showSuccessSnackbar, showErrorSnackbar } from "actions/snackbar";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 function Login(props) {
   const history = useHistory();
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const message1 = "请输入正确的邮箱格式";
@@ -58,6 +61,7 @@ function Login(props) {
         const { id } = resp.data;
         if (resp.status === 200) {
           props.login(id);
+          dispatch(showSuccessSnackbar("登录成功"));
           history.replace("/");
         }
       })
