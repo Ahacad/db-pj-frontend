@@ -26,10 +26,10 @@ function ReplyCard(props) {
             {reply.likecount}
           </div>
 
-          <div className="inline-block mr-2 text-gray-600">
+          <div className="inline-block mr-2 text-gray-600 cursor-pointer">
             <FavoriteBorderIcon />
           </div>
-          <div className="inline-block text-gray-600">
+          <div className="inline-block text-gray-600 cursor-pointer">
             <ShareIcon />
           </div>
         </div>
