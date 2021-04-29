@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./Header";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Login, Register, Main, Thread } from "views";
+import { Login, Register, Main, Thread, Home } from "views";
 import GlobalSnackbar from "components/GlobalSnackbar";
 
 //function Foo() {
@@ -51,6 +51,9 @@ function App() {
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/home">
+            <Home />
           </Route>
           <Route path="/">
             <Main />
