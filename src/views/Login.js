@@ -60,9 +60,10 @@ function Login(props) {
         console.log(resp);
         if (resp.status === 200) {
           const { id } = resp.data;
-          props.login(id);
+          dispatch(loginAction(id));
+          console.log("ID IS", id);
           dispatch(showSuccessSnackbar("登录成功"));
-          history.replace("/");
+          console.log(resp);
         }
       })
       .catch((err) => {
@@ -108,17 +109,4 @@ function Login(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    value: state,
-  };
-}
-
-// Map Redux actions to component props
-function mapDispatchToProps(dispatch) {
-  return {
-    login: (id) => dispatch(loginAction(id)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
