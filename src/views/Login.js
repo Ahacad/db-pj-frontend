@@ -68,7 +68,11 @@ function Login(props) {
         }
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
+        // TODO: more detailed error handler for 404 and 403
+        dispatch(
+          showErrorSnackbar("登录失败，请确认已经注册并且邮箱密码正确！")
+        );
       });
   };
   return (
