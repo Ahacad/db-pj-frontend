@@ -4,6 +4,8 @@ const initialState = {
   bio: "",
   username: "",
   userType: 1,
+  likedReplies: [],
+  likePosts: [],
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -15,9 +17,20 @@ const loginReducer = (state = initialState, action) => {
         bio: action.bio,
         username: action.username,
         userType: action.userType,
+        ...state,
       };
     case "LOGOUT":
-      return { loggedin: false, id: -1, bio: "", username: "", userType: 1 };
+      return initialState;
+    case "UPDATE_REPLY_LIKES":
+      return {
+        ...state,
+        likedReplies: action.likedReplies,
+      };
+    case "UPDATE_POST_LIKES":
+      return {
+        ...state,
+        likedPosts: action.likedPosts,
+      };
     default:
       return state;
   }
