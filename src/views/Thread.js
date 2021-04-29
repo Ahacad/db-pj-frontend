@@ -39,6 +39,7 @@ function Thread(props) {
           content: post.content,
           likecount: post.likecount,
         });
+        console.log(data.slice(1));
         setReplies(data.slice(1));
       })
       .catch((err) => console.error(err));
@@ -70,7 +71,7 @@ function Thread(props) {
   };
   useEffect(() => {
     fetchThread();
-  });
+  }, []);
   return (
     <div className="mx-auto mt-2 sm:w-190 Main">
       <div className="pb-4 border-b-2 border-gray-200">
@@ -101,7 +102,13 @@ function Thread(props) {
         </div>
       </div>
       {replies.map((reply) => (
-        <ReplyCard reply={reply} key={reply.id} />
+        <ReplyCard
+          reply={reply}
+          key={reply.id}
+          fetchThread={fetchThread}
+          setReplies={setReplies}
+          replies={replies}
+        />
       ))}
       <Fab
         color="secondary"

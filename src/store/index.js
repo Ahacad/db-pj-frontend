@@ -5,7 +5,13 @@ import snackbarReducer from "./snackbar";
 //import { throttle } from "lodash";
 
 const getLocalstorageUserState = () => {
-  const originUser = { loggedin: false, id: -1 };
+  const originUser = {
+    loggedin: false,
+    id: -1,
+    bio: "",
+    username: "",
+    userType: 1,
+  };
   try {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user === null) {
