@@ -36,6 +36,8 @@ import {
   Button,
 } from "@material-ui/core";
 import { showSuccessSnackbar } from "actions";
+import ReactMarkdown from "react-markdown";
+import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 
 const shareIcons = (
@@ -72,7 +74,8 @@ const shareIcons = (
 
 function ReplyCard(props) {
   const { fetchThread, reply, replies, setReplies, toggleEditor } = props;
-  const [liked, setLiked] = useState(false);
+  // TODO: like
+  const [like, setLike] = useState({ liked: false, liking: false });
   const dispatch = useDispatch();
   const login = useSelector((state) => state.login);
   const [deleteDialogOpened, setDeleteDialogOpened] = useState(false);
@@ -107,15 +110,17 @@ function ReplyCard(props) {
       </div>
       <div className="relative flex-grow pl-2 text-left">
         <div className="mb-2">{reply.name}</div>
-        <div className="min-h-36">{reply.content}</div>
+        <div className="min-h-36">
+          <ReactMarkdown>{reply.content}</ReactMarkdown>
+        </div>
         <div className="mt-2 text-right">
           <div className="inline-block text-gray-600">{reply.likecount}</div>
           <div className="inline-block ml-1 text-gray-600 cursor-pointer">
-            {liked ? (
+            {like.liked ? (
               <div
                 className="text-red-600"
                 onClick={() => {
-                  setLiked(!liked);
+                  setLike({ liked: !like.liked, liking: false });
                 }}
               >
                 <FavoriteIcon />
@@ -123,7 +128,7 @@ function ReplyCard(props) {
             ) : (
               <div
                 onClick={() => {
-                  setLiked(!liked);
+                  setLike({ liked: !like.liked, liking: false });
                 }}
               >
                 <FavoriteBorderIcon />
