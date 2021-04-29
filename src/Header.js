@@ -65,7 +65,7 @@ function Header() {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  {login.id === 0 && (
+                  {login.userType === 0 && (
                     <div className="mr-2 text-base">Admin</div>
                   )}
                   <AccountCircle />
