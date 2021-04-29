@@ -12,8 +12,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { logoutAction } from "actions";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function Header() {
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const handleMenu = (ev) => {
     setAnchorEl(ev.currentTarget);
@@ -85,7 +87,14 @@ function Header() {
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      history.replace("/home");
+                      handleClose();
+                    }}
+                  >
+                    Profile
+                  </MenuItem>
                   <MenuItem
                     onClick={() => {
                       handleClose();
