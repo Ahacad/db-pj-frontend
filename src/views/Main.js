@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 function Main() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.login.id);
+  const login = useSelector((state) => state.login);
 
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
@@ -40,11 +40,17 @@ function Main() {
       dispatch(showErrorSnackbar("请输入文字后发布"));
       return;
     }
+    if (!login.loggedin) {
+      dispatch(showErrorSnackbar("登录后才可以发布！"));
+      return;
+    }
     axios
       .post("https://localhost:4000/posts/new", {
-        userId,
+        userId: login.id,
         title: newpost.title,
         content: newpost.content,
+        // FIXME: departmentId change!
+        departmentId: 1,
       })
       .then((resp) => {
         if (resp.status === 201) {
