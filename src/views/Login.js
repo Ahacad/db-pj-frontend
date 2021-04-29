@@ -59,11 +59,12 @@ function Login(props) {
       .then((resp) => {
         console.log(resp);
         if (resp.status === 200) {
-          const { id } = resp.data;
-          dispatch(loginAction(id));
-          console.log("ID IS", id);
-          dispatch(showSuccessSnackbar("登录成功"));
+          const { bio, name: username, id, user_type: userType } = resp.data;
           console.log(resp);
+          console.log(username);
+          dispatch(loginAction(id, bio, username, userType));
+          dispatch(showSuccessSnackbar("登录成功"));
+          history.replace("/");
         }
       })
       .catch((err) => {

@@ -33,7 +33,6 @@ function Thread(props) {
       .get(`https://localhost:4000/posts/${params.id}`)
       .then((resp) => resp.data)
       .then((data) => {
-        console.log(data);
         const post = data[0];
         setPost({
           title: post.title,
