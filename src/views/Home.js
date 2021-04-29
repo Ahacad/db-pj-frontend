@@ -19,7 +19,9 @@ function Home() {
             className="w-16 h-16"
           />
           <div className="mt-2 text-2xl font-bold">{login.username}</div>
-          <div className="mt-2 text-lg text-gray-500">{login.bio}</div>
+          <div className="mt-2 text-lg text-gray-500" contentEditable>
+            {login.bio || "这个人很懒，什么也没有留下。。。"}
+          </div>
         </div>
       )}
     </div>
