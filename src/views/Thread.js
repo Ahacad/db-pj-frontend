@@ -21,13 +21,16 @@ const useStyles = makeStyles((theme) => ({
 
 function Thread(props) {
   const params = useParams();
-  const userId = useSelector((state) => state.login.id);
+  const login = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const classes = useStyles();
   const [editorOpened, setEditorOpened] = useState(false);
   const [newreply, setNewreply] = useState({ content: "" });
   const [post, setPost] = useState({ title: "", content: "", likecount: 0 });
   const [replies, setReplies] = useState([]);
+  const toggleEditor = () => {
+    editorOpened === true ? setEditorOpened(false) : setEditorOpened(true);
+  };
   const fetchThread = async () => {
     axios
       .get(`https://localhost:4000/posts/${params.id}`)
@@ -49,9 +52,13 @@ function Thread(props) {
       dispatch(showErrorSnackbar("请输入文字后发布"));
       return;
     }
+    if (!login.loggedin) {
+      dispatch(showErrorSnackbar("登录后才可以发布！"));
+      return;
+    }
     axios
       .post(`https://localhost:4000/posts/${params.id}/newreply`, {
-        userId,
+        userId: login.id,
         content: newreply.content,
       })
       .then((resp) => {
@@ -108,17 +115,10 @@ function Thread(props) {
           fetchThread={fetchThread}
           setReplies={setReplies}
           replies={replies}
+          toggleEditor={toggleEditor}
         />
       ))}
-      <Fab
-        color="secondary"
-        className={classes.fab}
-        onClick={() => {
-          editorOpened === true
-            ? setEditorOpened(false)
-            : setEditorOpened(true);
-        }}
-      >
+      <Fab color="secondary" className={classes.fab} onClick={toggleEditor}>
         <EditIcon />
       </Fab>
 
