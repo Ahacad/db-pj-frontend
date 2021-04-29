@@ -38,6 +38,38 @@ import {
 import { showSuccessSnackbar } from "actions";
 import axios from "axios";
 
+const shareIcons = (
+  <>
+    <EmailShareButton>
+      <EmailIcon round size={48} />
+    </EmailShareButton>
+    <LinkedinShareButton>
+      <LinkedinIcon round size={48} />
+    </LinkedinShareButton>
+    <TwitterShareButton>
+      <TwitterIcon round size={48} />
+    </TwitterShareButton>
+    <RedditShareButton>
+      <RedditIcon round size={48} />
+    </RedditShareButton>
+    <PinterestShareButton>
+      <PinterestIcon round size={48} />
+    </PinterestShareButton>
+    <TelegramShareButton>
+      <TelegramIcon round size={48} />
+    </TelegramShareButton>
+    <FacebookShareButton>
+      <FacebookIcon round size={48} />
+    </FacebookShareButton>
+    <PocketShareButton>
+      <PocketIcon round size={48} />
+    </PocketShareButton>
+    <WhatsappShareButton>
+      <WhatsappIcon round size={48} />
+    </WhatsappShareButton>
+  </>
+);
+
 function ReplyCard(props) {
   const { fetchThread, reply, replies, setReplies, toggleEditor } = props;
   const [liked, setLiked] = useState(false);
@@ -157,33 +189,7 @@ function ReplyCard(props) {
         <DialogTitle id="alert-dialog-title">分享</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <EmailShareButton>
-              <EmailIcon round size={48} />
-            </EmailShareButton>
-            <LinkedinShareButton>
-              <LinkedinIcon round size={48} />
-            </LinkedinShareButton>
-            <TwitterShareButton>
-              <TwitterIcon round size={48} />
-            </TwitterShareButton>
-            <RedditShareButton>
-              <RedditIcon round size={48} />
-            </RedditShareButton>
-            <PinterestShareButton>
-              <PinterestIcon round size={48} />
-            </PinterestShareButton>
-            <TelegramShareButton>
-              <TelegramIcon round size={48} />
-            </TelegramShareButton>
-            <FacebookShareButton>
-              <FacebookIcon round size={48} />
-            </FacebookShareButton>
-            <PocketShareButton>
-              <PocketIcon round size={48} />
-            </PocketShareButton>
-            <WhatsappShareButton>
-              <WhatsappIcon round size={48} />
-            </WhatsappShareButton>
+            {shareIcons}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
