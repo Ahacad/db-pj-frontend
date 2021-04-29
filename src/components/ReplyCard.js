@@ -1,8 +1,32 @@
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  PinterestShareButton,
+  PocketShareButton,
+  RedditShareButton,
+  TelegramShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share";
+import {
+  EmailIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  RedditIcon,
+  PinterestIcon,
+  TelegramIcon,
+  FacebookIcon,
+  PocketIcon,
+  WhatsappIcon,
+} from "react-share";
 import {
   Dialog,
   DialogActions,
@@ -15,13 +39,14 @@ import { showSuccessSnackbar } from "actions";
 import axios from "axios";
 
 function ReplyCard(props) {
-  const { fetchThread, reply, replies, setReplies } = props;
+  const { fetchThread, reply, replies, setReplies, toggleEditor } = props;
+  const [liked, setLiked] = useState(false);
   const dispatch = useDispatch();
-  const userType = useSelector((state) => state.login.userType);
+  const login = useSelector((state) => state.login);
   const [deleteDialogOpened, setDeleteDialogOpened] = useState(false);
+  const [shareDialogOpened, setShareDialogOpened] = useState(false);
   const [todeleteReplyId, setTodeleteReplyId] = useState(-1);
   const handleDeleteReply = () => {
-    // TODO
     axios
       .post(`https://localhost:4000/posts/${reply.post_id}/delete`, {
         replyId: reply.id,
@@ -54,12 +79,42 @@ function ReplyCard(props) {
         <div className="mt-2 text-right">
           <div className="inline-block text-gray-600">{reply.likecount}</div>
           <div className="inline-block ml-1 text-gray-600 cursor-pointer">
-            <FavoriteBorderIcon />
+            {liked ? (
+              <div
+                className="text-red-600"
+                onClick={() => {
+                  setLiked(!liked);
+                }}
+              >
+                <FavoriteIcon />
+              </div>
+            ) : (
+              <div
+                onClick={() => {
+                  setLiked(!liked);
+                }}
+              >
+                <FavoriteBorderIcon />
+              </div>
+            )}
           </div>
-          <div className="inline-block ml-2 text-gray-600 cursor-pointer">
+          <div
+            className="inline-block ml-2 text-gray-600 cursor-pointer"
+            onClick={() => {
+              setShareDialogOpened(!shareDialogOpened);
+            }}
+          >
             <ShareIcon />
           </div>
-          {userType === 0 && (
+          {reply.userid === login.id && (
+            <div
+              className="inline-block ml-2 text-gray-600 cursor-pointer"
+              onClick={toggleEditor}
+            >
+              <EditIcon />
+            </div>
+          )}
+          {(login.userType === 0 || reply.userid === login.id) && (
             <div
               className="inline-block ml-2 text-gray-600 cursor-pointer"
               onClick={() => {
@@ -90,6 +145,50 @@ function ReplyCard(props) {
           </Button>
           <Button color="secondary" autoFocus onClick={handleDeleteReply}>
             确定
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={shareDialogOpened}
+        onClose={() => setShareDialogOpened(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">分享</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <EmailShareButton>
+              <EmailIcon round size={48} />
+            </EmailShareButton>
+            <LinkedinShareButton>
+              <LinkedinIcon round size={48} />
+            </LinkedinShareButton>
+            <TwitterShareButton>
+              <TwitterIcon round size={48} />
+            </TwitterShareButton>
+            <RedditShareButton>
+              <RedditIcon round size={48} />
+            </RedditShareButton>
+            <PinterestShareButton>
+              <PinterestIcon round size={48} />
+            </PinterestShareButton>
+            <TelegramShareButton>
+              <TelegramIcon round size={48} />
+            </TelegramShareButton>
+            <FacebookShareButton>
+              <FacebookIcon round size={48} />
+            </FacebookShareButton>
+            <PocketShareButton>
+              <PocketIcon round size={48} />
+            </PocketShareButton>
+            <WhatsappShareButton>
+              <WhatsappIcon round size={48} />
+            </WhatsappShareButton>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" autoFocus onClick={handleDeleteReply}>
+            关闭
           </Button>
         </DialogActions>
       </Dialog>
