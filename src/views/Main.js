@@ -8,7 +8,11 @@ import { TextField, IconButton } from "@material-ui/core";
 import { Fab, Slide } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { useHistory } from "react-router-dom";
-import { showSuccessSnackbar, showErrorSnackbar } from "actions/snackbar";
+import {
+  showSuccessSnackbar,
+  showErrorSnackbar,
+  setPostsAction,
+} from "actions";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -71,6 +75,16 @@ function Main() {
       })
       .then((data) => {
         setPosts(data);
+        dispatch(
+          setPostsAction(
+            data.map((post) => {
+              return {
+                id: post.id,
+                title: post.title,
+              };
+            })
+          )
+        );
         console.log(data);
       })
       .catch((err) => {
