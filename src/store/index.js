@@ -2,6 +2,7 @@ import { combineReducers, createStore } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
 import loginReducer from "./login";
 import snackbarReducer from "./snackbar";
+import postsReducer from "./posts";
 //import { throttle } from "lodash";
 
 const getLocalstorageUserState = () => {
@@ -29,6 +30,7 @@ const getLocalstorageUserState = () => {
 
 const initialState = {
   login: getLocalstorageUserState(),
+  posts: [],
   snackbar: {
     snackbarOpen: false,
     message: "",
@@ -40,6 +42,7 @@ const store = createStore(
   combineReducers({
     login: loginReducer,
     snackbar: snackbarReducer,
+    posts: postsReducer,
   }),
   initialState,
   composeWithDevTools()
