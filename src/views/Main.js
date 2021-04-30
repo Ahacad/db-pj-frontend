@@ -128,7 +128,7 @@ function Main() {
             <div className="text-left">
               <TextField
                 id="title"
-                label="title"
+                label="标题"
                 variant="outlined"
                 value={newpost.title}
                 onChange={handleNewpostTitle}
