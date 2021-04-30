@@ -9,6 +9,7 @@ import {
   clearSnackbar,
   showErrorSnackbar,
 } from "./snackbar";
+import { setPostsAction } from "./posts";
 
 export {
   loginAction,
@@ -17,3 +18,4 @@ export {
   updateLikedPostsAction,
 };
 export { showSuccessSnackbar, clearSnackbar, showErrorSnackbar };
+export { setPostsAction };

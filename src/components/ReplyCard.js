@@ -149,12 +149,7 @@ function ReplyCard(props) {
   return (
     <div className="flex p-2 mt-1 border-b-2 border-gray-200">
       <div className="flex-shrink-0 w-10">
-        <img
-          src={`https://picsum.photos/seed/${Math.floor(
-            Math.random() * 1000
-          )}/40/40`}
-          alt="head"
-        />
+        <img src={`https://picsum.photos/seed/reply/40/40`} alt="head" />
       </div>
       <div className="relative flex-grow pl-2 text-left">
         <div className="mb-2">{reply.name}</div>

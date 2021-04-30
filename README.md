@@ -13,7 +13,9 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [x] register api
 - [x] allow deletion for admins [FIX DELETE BUG]
 - [x] shares
-- [ ] like api
+- [x] like api
+  - [x] like api for replies
+  - [ ] like api for posts
 - [ ] search bar drop down
 - [ ] edit api
 
