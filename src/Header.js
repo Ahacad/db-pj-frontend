@@ -6,6 +6,7 @@ import {
   Button,
   Menu,
   MenuItem,
+  TextField,
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -16,6 +17,8 @@ import { logoutAction } from "actions";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Autocomplete } from "@material-ui/lab";
+import { StylesProvider } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -45,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: "inherit",
   },
+  textField: {
+    color: "red",
+    borderColor: "red",
+    borderWidth: "2px",
+  },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -54,6 +62,17 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
+  },
+  cssOutlinedInput: {
+    "&$cssFocused $notchedOutline": {
+      borderColor: `${theme.palette.primary.main} !important`,
+    },
+  },
+  notchedOutline: {
+    borderColor: "white ",
+  },
+  input: {
+    color: "white",
   },
 }));
 
@@ -70,10 +89,13 @@ function Header() {
   };
   const dispatch = useDispatch();
   const login = useSelector((state) => state.login);
-  console.log("HELLO");
-  console.log(login);
-  console.log(typeof login);
-  console.log(login.loggedin);
+  const posts = useSelector((state) => state.posts);
+  const [searchText, setSearchText] = useState("");
+  //const handleSearchChange = (ev) => {
+  //ev.preventDefault();
+  //console.log(ev.target.value);
+  //};
+
   return (
     <>
       <div className="flex flex-grow">
@@ -102,17 +124,36 @@ function Header() {
               </Button>
             </div>
 
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
+            <div>
+              <Autocomplete
+                id="combo-box-demo"
+                options={posts}
+                getOptionLabel={(option) => option.title}
+                style={{ width: 300 }}
+                renderOption={(option) => (
+                  <div
+                    onClick={() => {
+                      history.replace(`/post/${option.id}`);
+                    }}
+                  >
+                    {option.title}
+                  </div>
+                )}
+                renderInput={(params) => (
+                  <div ref={params.InputProps.ref}>
+                    <input
+                      style={{
+                        height: 40,
+                        padding: 5,
+                        color: "black",
+                        borderRadius: 5,
+                      }}
+                      type="text"
+                      placeholder="搜索 ..."
+                      {...params.inputProps}
+                    />
+                  </div>
+                )}
               />
             </div>
 
