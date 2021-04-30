@@ -5,7 +5,12 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showSuccessSnackbar, showErrorSnackbar } from "actions/snackbar";
+import {
+  showSuccessSnackbar,
+  showErrorSnackbar,
+  setPosts,
+  setReplies,
+} from "actions";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -80,6 +85,20 @@ function Login(props) {
       .then((replies) => {
         dispatch(updateLikedRepliesAction(replies));
       });
+    axios
+      .get(`https://localhost:4000/users/${login.id}/posts`)
+      .then((resp) => resp.data)
+      .then((posts) => {
+        dispatch(setPosts(posts));
+      })
+      .catch((err) => console.error(err));
+    axios
+      .get(`https://localhost:4000/users/${login.id}/replies`)
+      .then((resp) => resp.data)
+      .then((replies) => {
+        dispatch(setReplies(replies));
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <>
