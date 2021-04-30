@@ -133,7 +133,7 @@ function Header() {
                 renderOption={(option) => (
                   <div
                     onClick={() => {
-                      history.replace(`/post/${option.id}`);
+                      history.push(`/post/${option.id}`);
                     }}
                   >
                     {option.title}

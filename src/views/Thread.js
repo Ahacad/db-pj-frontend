@@ -78,7 +78,7 @@ function Thread(props) {
   };
   useEffect(() => {
     fetchThread();
-  }, []);
+  }, [params]);
   return (
     <div className="mx-auto mt-2 sm:w-190 Main">
       <div className="pb-4 border-b-2 border-gray-200">
