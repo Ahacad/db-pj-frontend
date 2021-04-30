@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { showErrorSnackbar } from "actions";
 import { useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, Tabs, Tab, AppBar } from "@material-ui/core";
+import Card from "components/Card";
+import ReplyCard from "components/ReplyCard";
 import axios from "axios";
 
 function Bio(props) {
@@ -45,13 +47,35 @@ function Bio(props) {
   }
 }
 
+function TabPanel(props) {
+  const login = useSelector((state) => state.login);
+  const { value, index } = props;
+  if (value === index && index === 0) {
+    return (
+      <>
+        {login.posts.map((post) => (
+          <Card post={post} />
+        ))}
+      </>
+    );
+  } else if (value === index && index === 1) {
+    return <>YET TO BE DONE</>;
+  } else {
+    return <>NOTHING</>;
+  }
+}
+
 function Home() {
   const dispatch = useDispatch();
   const history = useHistory();
   const login = useSelector((state) => state.login);
+  const [value, setValue] = useState(0);
   if (!login.loggedin) {
     dispatch(showErrorSnackbar("登录后才有信息哦"));
   }
+  const handleChange = (ev, newValue) => {
+    setValue(newValue);
+  };
   return (
     <div>
       {login.loggedin && (
@@ -63,6 +87,22 @@ function Home() {
           />
           <div className="mt-2 text-2xl font-bold">{login.username}</div>
           <Bio login={login} />
+          <div className="mt-4">
+            <Tabs
+              aria-label="simple tabs example"
+              value={value}
+              onChange={handleChange}
+            >
+              <Tab label="Posts" />
+              <Tab label="Replies" />
+            </Tabs>
+            <TabPanel index={0} value={value}>
+              Posts
+            </TabPanel>
+            <TabPanel index={1} value={value}>
+              Replies
+            </TabPanel>
+          </div>
         </div>
       )}
     </div>
