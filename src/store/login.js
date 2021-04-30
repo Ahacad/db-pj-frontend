@@ -6,6 +6,8 @@ const initialState = {
   userType: 1,
   likedReplies: [],
   likePosts: [],
+  posts: [],
+  replies: [],
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -31,6 +33,16 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         likedPosts: action.likedPosts,
+      };
+    case "SET_POSTS":
+      return {
+        ...state,
+        posts: action.posts,
+      };
+    case "SET_REPLIES":
+      return {
+        ...state,
+        replies: action.replies,
       };
     default:
       return state;

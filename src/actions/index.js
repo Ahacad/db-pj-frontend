@@ -3,6 +3,8 @@ import {
   logoutAction,
   updateLikedPostsAction,
   updateLikedRepliesAction,
+  setPosts,
+  setReplies,
 } from "./login";
 import {
   showSuccessSnackbar,
@@ -16,6 +18,8 @@ export {
   logoutAction,
   updateLikedRepliesAction,
   updateLikedPostsAction,
+  setPosts,
+  setReplies,
 };
 export { showSuccessSnackbar, clearSnackbar, showErrorSnackbar };
 export { setPostsAction };
