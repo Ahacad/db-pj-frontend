@@ -35,7 +35,11 @@ import {
   DialogTitle,
   Button,
 } from "@material-ui/core";
-import { showSuccessSnackbar } from "actions";
+import {
+  updateLikedRepliesAction,
+  showSuccessSnackbar,
+  showErrorSnackbar,
+} from "actions";
 import ReactMarkdown from "react-markdown";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
@@ -80,7 +84,21 @@ function ReplyCard(props) {
   const login = useSelector((state) => state.login);
   const [deleteDialogOpened, setDeleteDialogOpened] = useState(false);
   const [shareDialogOpened, setShareDialogOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [todeleteReplyId, setTodeleteReplyId] = useState(-1);
+
+  const syncReplyLikes = () => {
+    axios
+      .get(`https://localhost:4000/users/${login.id}/replylikes`)
+      .then((resp) => {
+        return resp.data;
+      })
+      .then((replies) => {
+        dispatch(updateLikedRepliesAction(replies));
+      })
+      .catch((err) => console.error(err));
+  };
+
   const handleDeleteReply = () => {
     axios
       .post(`https://localhost:4000/posts/${reply.post_id}/delete`, {
@@ -97,6 +115,36 @@ function ReplyCard(props) {
         }
       })
     );
+  };
+  const handleLike = () => {
+    setIsLoading(true);
+    axios
+      .post(`https://localhost:4000/posts/${reply.post_id}/reply/like`, {
+        userId: login.id,
+        replyId: reply.id,
+      })
+      .then(async (resp) => {
+        if (resp.status === 200) {
+          await syncReplyLikes();
+          fetchThread();
+        }
+      });
+    setIsLoading(false);
+  };
+  const handleUnlike = () => {
+    setIsLoading(true);
+    axios
+      .post(`https://localhost:4000/posts/${reply.post_id}/reply/unlike`, {
+        userId: login.id,
+        replyId: reply.id,
+      })
+      .then(async (resp) => {
+        if (resp.status === 200) {
+          await syncReplyLikes();
+          fetchThread();
+        }
+      });
+    setIsLoading(false);
   };
   return (
     <div className="flex p-2 mt-1 border-b-2 border-gray-200">
@@ -116,21 +164,15 @@ function ReplyCard(props) {
         <div className="mt-2 text-right">
           <div className="inline-block text-gray-600">{reply.likecount}</div>
           <div className="inline-block ml-1 text-gray-600 cursor-pointer">
-            {like.liked ? (
-              <div
-                className="text-red-600"
-                onClick={() => {
-                  setLike({ liked: !like.liked, liking: false });
-                }}
-              >
+            {isLoading ? (
+              <CircularProgress size={15} />
+            ) : login.likedReplies.findIndex((ele) => ele === reply.id) !==
+              -1 ? (
+              <div className="text-red-600" onClick={handleUnlike}>
                 <FavoriteIcon />
               </div>
             ) : (
-              <div
-                onClick={() => {
-                  setLike({ liked: !like.liked, liking: false });
-                }}
-              >
+              <div onClick={handleLike}>
                 <FavoriteBorderIcon />
               </div>
             )}
