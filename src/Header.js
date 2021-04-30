@@ -149,6 +149,7 @@ function Header() {
                         borderRadius: 5,
                       }}
                       type="text"
+                      autoComplete="false"
                       placeholder="搜索 ..."
                       {...params.inputProps}
                     />
