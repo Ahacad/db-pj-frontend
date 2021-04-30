@@ -19,17 +19,19 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [x] search bar drop down
 - [ ] edit api
 
+- [ ] mine page for my own posts
 - [ ] reply to reply
 - [ ] emoji interactions
 - [ ] divide by different parts
 - [ ] different things for main (hottest k, newest, etc.)
 - [ ] edit home information
-- [ ] markdown support
+- [x] markdown support
 - [x] "HOME" page for personal info (better user state info from backend)
 - [x] much more detailed personal info
 - [ ] 
 - [x] localstorage for login redux state
 - [x] sort posts by createdTime
+- [ ] better markdown support
 - [ ] mobile fitting
 - [ ] fix reply length
 - [ ] fix picture problem
