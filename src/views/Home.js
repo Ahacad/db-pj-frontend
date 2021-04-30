@@ -53,15 +53,15 @@ function TabPanel(props) {
   if (value === index && index === 0) {
     return (
       <>
-        {login.posts.map((post) => (
+        {/*login.posts.map((post) => (
           <Card post={post} />
-        ))}
+        ))*/}
       </>
     );
   } else if (value === index && index === 1) {
-    return <>YET TO BE DONE</>;
+    return <>REPLIES</>;
   } else {
-    return <>NOTHING</>;
+    return <>POSTS</>;
   }
 }
 
