@@ -12,33 +12,35 @@ Backend repo [here](https://github.com/Ahacad/db-pj-backend)
 - [x] editor styles and transitions
 - [x] register api
 - [x] allow deletion for admins [FIX DELETE BUG]
-- [ ] shares
+- [x] shares
 - [ ] like api
+- [ ] search bar drop down
 - [ ] edit api
+
+- [ ] reply to reply
+- [ ] emoji interactions
 - [ ] divide by different parts
 - [ ] different things for main (hottest k, newest, etc.)
-- [ ] search bar
+- [ ] edit home information
 - [ ] markdown support
 - [x] "HOME" page for personal info (better user state info from backend)
 - [x] much more detailed personal info
 - [ ] 
 - [x] localstorage for login redux state
 - [x] sort posts by createdTime
+- [ ] mobile fitting
 - [ ] fix reply length
 - [ ] fix picture problem
-- [ ] fix time text length
-
-
-- [ ] JWT for authorization
-- [ ] [markdown] rich text support
-- [ ] fix time display format
+- [ ] fix time text length && time display format
 - [ ] frontend limit on content length
 - [ ] throttle for redux subscribe and localstorage
 - [ ] debounce for input
-- [ ] multiple global snackbar (snackbar extention, use function to call many snackbar)
 - [ ] fixed app bar
-- [x] Vercel CD 
+- [ ] multiple global snackbar (snackbar extention, use function to call many snackbar)
+- [ ] JWT for authorization
 
+
+- [x] Vercel CD 
 - [x] show replies in post page
   - [x] api to get thread 
 - [x] "add +" button at right bottom of the page --> write new post

@@ -11,6 +11,8 @@ const getLocalstorageUserState = () => {
     bio: "",
     username: "",
     userType: 1,
+    likePosts: [],
+    likedReplies: [],
   };
   try {
     const user = JSON.parse(localStorage.getItem("user"));

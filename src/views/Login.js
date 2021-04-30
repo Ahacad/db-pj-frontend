@@ -1,10 +1,10 @@
 import { TextField, Button, Snackbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { loginAction } from "actions";
+import { loginAction, updateLikedRepliesAction } from "actions";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showSuccessSnackbar, showErrorSnackbar } from "actions/snackbar";
 import axios from "axios";
 
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Login(props) {
   const history = useHistory();
+  const login = useSelector((state) => state.login);
   const classes = useStyles();
   const dispatch = useDispatch();
   const [mail, setMail] = useState("");
@@ -45,26 +46,25 @@ function Login(props) {
   const handleCloseSnackbar = () => {
     setSnackbar({ ...snackbar, open: false });
   };
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
     if (!/\w+@\w+\.\w+/.test(mail)) {
       setSnackbar({ ...snackbar, open: true });
       return;
     }
-    axios
+    await axios
       .post("https://localhost:4000/users/login", {
         email: mail,
         password,
       })
       .then((resp) => {
-        console.log(resp);
         if (resp.status === 200) {
           const { bio, name: username, id, user_type: userType } = resp.data;
           console.log(resp);
-          console.log(username);
           dispatch(loginAction(id, bio, username, userType));
           dispatch(showSuccessSnackbar("登录成功"));
           history.replace("/");
+          return id;
         }
       })
       .catch((err) => {
@@ -73,6 +73,12 @@ function Login(props) {
         dispatch(
           showErrorSnackbar("登录失败，请确认已经注册并且邮箱密码正确！")
         );
+      });
+    axios
+      .get(`https://localhost:4000/users/${login.id}/replylikes`)
+      .then((resp) => resp.data)
+      .then((replies) => {
+        dispatch(updateLikedRepliesAction(replies));
       });
   };
   return (

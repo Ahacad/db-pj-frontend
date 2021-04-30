@@ -13,11 +13,12 @@ const loginReducer = (state = initialState, action) => {
     case "LOGIN":
       return {
         loggedin: true,
-        id: action.id || 1,
+        id: action.id,
         bio: action.bio,
         username: action.username,
         userType: action.userType,
-        ...state,
+        likedReplies: [],
+        likedPosts: [],
       };
     case "LOGOUT":
       return initialState;
